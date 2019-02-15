@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    hello world
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.0/redux.min.js"></script>
+
+
+    <script>
+    
+        //action
+        // var person = {
+        //     type: "ADD",
+        //     personData: {
+        //         id: 1,
+        //         name: 'Veronica',
+        //         age: 13
+        //     }
+        // }
+        //action creator
+        function addPerson(id, name, age){
+            return {
+                type: "ADD",
+                personData: {
+                    id: id,
+                    name: name,
+                    age: age
+                }
+            }
+        }
+        function removePerson(id){
+            return {
+                type: "REMOVE",
+                personId: id
+            }
+        }
+        //initial state
+        const initalState = {
+            persons: []
+        }
+        
+        //reducer
+        //state that store has passed in 
+        function reducer(state, action){
+            if(state === undefined){
+                state = initalState
+            }
+            if(action.type === "ADD"){
+                let newPerson = {
+                    id: action.personData.id,
+                    name: action.personData.name,
+                    age: action.personData.age
+                }
+                return {
+                    ...state,
+                    persons: state.persons.concat(newPerson)
+                }
+                
+            }
+            else if (action.type === "REMOVE"){
+                  return{
+                      ...state,
+                      persons: state.persons.filter(person => person.id != action.personId)
+                  }  
+            }
+            else{
+                return state;
+            }
+        }
+        var store = Redux.createStore(reducer);
+        store.subscribe(showState);
+        function showState(){
+            console.log(store.getState());
+        }
+        store.dispatch(addPerson(1, "Sobha", 21));
+        store.dispatch(addPerson(2, "Erick", 21));
+        store.dispatch(addPerson(3, "Phong", 21));
+        store.dispatch(addPerson(4, "Anuj", 21));
+        store.dispatch(addPerson(5, "Rigo", 21));
+        store.dispatch(removePerson(2));
+    
+    </script>
+</body>
+</html>
