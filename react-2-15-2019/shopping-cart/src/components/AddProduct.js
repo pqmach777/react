@@ -1,53 +1,76 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import addProduct from '../actions/addProduct'
+import addProduct from '../actions/addProduct';
+
 
 class AddProduct extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state= {
+
+        this.state = {
             productName: '',
-            productPrice : 0
+            productPrice: 0
         }
+        
     }
+
     productNameChange(e){
+
         this.setState({
-            
+            productName: e.target.value 
+        })
+    }
+
+    productPriceChange(e){
+
+        this.setState({
+            productPrice: e.target.value
         })
     }
 
     render() {
         return (
-                <div>
-                    <input type='text'
-                    placeholder='Product Name' 
-                    onChange={this.productNameChange.bind(this)}
-                    />
+            <div>
+                {this.state.productName}
+                <br />
+                <input type="text"
+                placeholder="Product Name"
+                onChange={this.productNameChange.bind(this)}
+                />
 
-                    <input type='text'
-                    placeholder='Product Price'
-                    />
+                
+                <input type="text"
+                placeholder="Product Price"
+                onChange={(e)=> this.productPriceChange(e)}
+                />
+                <br />
+ 
 
-                    <button onClick={()=>onAddProduct({
-                        productName: this.state.productName
-                    })}>Add Product</button>
-                </div>
+                <button onClick={()=> this.props.onAddProduct({
+                    productName: this.state.productName,
+                    productPrice: this.state.productPrice
+                })}>Add Product</button>
+            </div>
         );
     }
 }
 
-
-
 function mapStateToProps(state){
+
     return{
         totalCost: state.totalCost,
         productCart: state.productCart
     }
+
 }
 
+
 function mapDispatchToProps(dispatch){
-    return{
-        onAddProduct: (productData)=> {dispatch(addProduct(productData))},
+
+    return {
+        onAddProduct: (productData) => dispatch(addProduct(productData)) 
     }
+
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(AddProduct)

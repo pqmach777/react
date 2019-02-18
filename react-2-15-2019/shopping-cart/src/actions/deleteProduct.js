@@ -4,7 +4,10 @@ var deleteProduct = (id) => {
     return(
         {
             type: 'deleteProduct',
-            productId: id
+            productData: {
+                productName: id.productName,
+                productPrice: id.productPrice
+            }
         }
     )
 }

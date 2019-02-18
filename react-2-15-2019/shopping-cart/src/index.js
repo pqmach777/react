@@ -13,17 +13,15 @@ import Cart from './components/Cart';
 const store = createStore(productReducer);
 
 ReactDOM.render(
-<Provider store = {store}>
-<BrowserRouter>
-    <BaseLayout>
-        <Switch>
-            <Route exact path="/" component={Cart}/>
-            <Route path="/app" component={App} />
-        </Switch>
-    </BaseLayout>
-</BrowserRouter>
-</Provider>
-
-, document.getElementById('root'));
-
+    <Provider store={store}>
+    <BrowserRouter>
+       <BaseLayout>
+            <Switch> 
+                <Route exact path="/" component={Cart} />
+                <Route path="/app" component={App} />
+            </Switch>
+       </BaseLayout>
+    </BrowserRouter>
+    </Provider>
+    , document.getElementById('root'));
 

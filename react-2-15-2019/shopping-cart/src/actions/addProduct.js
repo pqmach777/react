@@ -1,7 +1,7 @@
-
 function addProduct(item){
+
     console.log(`adding product ${item.productName} ${item.productPrice}`)
-    return{
+    return {
         type: 'addProduct',
         productData: {
             productName: item.productName,
@@ -9,5 +9,6 @@ function addProduct(item){
         }
     }
 }
+
 
 export default addProduct;

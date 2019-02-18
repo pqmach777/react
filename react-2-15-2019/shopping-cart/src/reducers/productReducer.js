@@ -3,10 +3,7 @@ function productReducer(state,action){
     if(state === undefined){
         return {
             totalCost: 0,
-            productCart:{
-                productName: '',
-                productPrice: 0
-            }
+            productCart: []
         }
     }
     switch(action.type){
@@ -22,7 +19,14 @@ function productReducer(state,action){
             }
 
         case 'deleteProduct':
-        return state
+        const updateArray = state.productCart.filter(product=>{
+            return product.productName !== action.productData.productName
+        })
+        return {
+            ...state,
+            totalCost: state.totalCost - parseInt(action.productData.productPrice),
+            productCart: updateArray
+        }
         
         default:
         return state;
